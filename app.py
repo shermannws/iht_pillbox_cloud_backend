@@ -7,7 +7,7 @@ from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 
-@app.route('/predict', methods=['GET'])
+@app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
@@ -46,7 +46,7 @@ def predict():
     return jsonify({'predicted_time_difference': str(predicted_time_difference)})
 
 
-@app.route('/predict-mock', methods=['GET'])
+@app.route('/predict-mock', methods=['POST'])
 def predictMock():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
@@ -54,7 +54,7 @@ def predictMock():
 
     return jsonify({'predicted_time_difference': str("0:35:33.541243")})
 
-@app.route('/predict-mockfast', methods=['GET'])
+@app.route('/predict-mockfast', methods=['POST'])
 def predictMockFast():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
