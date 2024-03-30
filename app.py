@@ -54,6 +54,14 @@ def predictMock():
 
     return jsonify({'predicted_time_difference': str("0:35:33.541243")})
 
+@app.route('/predict-mockfast', methods=['GET'])
+def predictMockFast():
+    data = request.get_json()
+    input_administered_time = pd.Timestamp(data['administeredtime'])
+    input_medication_type = data['medicationtype']
+
+    return jsonify({'predicted_time_difference': str("0:0:30.541243")})
+
 if __name__ == '__main__':
     # app.run(debug=False, port=5000)
     # Production
