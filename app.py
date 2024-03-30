@@ -3,6 +3,7 @@ from model import train_model
 from database import create_connection, fetch_data
 import pandas as pd
 import numpy as np
+from gevent.pywsgi import WSGIServer
 
 app = Flask(__name__)
 
@@ -54,4 +55,7 @@ def predictMock():
     return jsonify({'predicted_time_difference': str("0:35:33.541243")})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # app.run(debug=False, port=5000)
+    # Production
+    http_server = WSGIServer(('', 5000), app)
+    http_server.serve_forever()
