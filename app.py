@@ -10,6 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/predict', methods=['POST'])
+@cross_origin(origin='*')
 def predict():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
@@ -49,6 +50,7 @@ def predict():
 
 
 @app.route('/predict-mock', methods=['POST'])
+@cross_origin(origin='*')
 def predictMock():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
@@ -57,6 +59,7 @@ def predictMock():
     return jsonify({'predicted_time_difference': str("0:35:33.541243")})
 
 @app.route('/predict-mockfast', methods=['POST'])
+@cross_origin(origin='*')
 def predictMockFast():
     data = request.get_json()
     input_administered_time = pd.Timestamp(data['administeredtime'])
@@ -65,7 +68,7 @@ def predictMockFast():
     return jsonify({'predicted_time_difference': str("0:0:30.541243")})
 
 if __name__ == '__main__':
-    # app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000)
     # Production
-    http_server = WSGIServer(('', 5000), app)
-    http_server.serve_forever()
+    # http_server = WSGIServer(('', 5000), app)
+    # http_server.serve_forever()
