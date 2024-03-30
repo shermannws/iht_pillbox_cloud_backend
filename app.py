@@ -7,7 +7,7 @@ from gevent.pywsgi import WSGIServer
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 @app.route('/predict', methods=['POST'])
 @cross_origin(origin='*')
@@ -65,7 +65,7 @@ def predictMockFast():
     input_administered_time = pd.Timestamp(data['administeredtime'])
     input_medication_type = data['medicationtype']
 
-    return jsonify({'predicted_time_difference': str("0:0:30.541243")})
+    return jsonify({'predicted_time_difference': str("0:0:05.541243")})
 
 if __name__ == '__main__':
     # app.run(debug=True, port=5000)
