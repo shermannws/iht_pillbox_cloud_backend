@@ -15,12 +15,15 @@ def basic_authentication():
     if request.method.lower() == 'options':
         return Response()
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET'])
 @cross_origin(origin='*')
 def predict():
-    data = request.get_json()
-    input_administered_time = pd.Timestamp(data['administeredtime'])
-    input_medication_type = data['medicationtype']
+    # data = request.get_json()
+    # input_administered_time = pd.Timestamp(data['administeredtime'])
+    # input_medication_type = data['medicationtype']
+
+    input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
+    input_medication_type= request.args.get('medicationtype')
 
     connection = create_connection()
     records = fetch_data(connection)
@@ -55,24 +58,29 @@ def predict():
     return jsonify({'predicted_time_difference': str(predicted_time_difference)})
 
 
-@app.route('/predict-mock', methods=['POST'])
+@app.route('/predict-mock', methods=['GET'])
 @cross_origin(origin='*')
 def predictMock():
-    data = request.get_json()
-    input_administered_time = pd.Timestamp(data['administeredtime'])
-    input_medication_type = data['medicationtype']
+    # data = request.get_json()
+    # input_administered_time = pd.Timestamp(data['administeredtime'])
+    # input_medication_type = data['medicationtype']
+    input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
+    input_medication_type= request.args.get('medicationtype')
 
     return jsonify({'predicted_time_difference': str("0:35:33.541243")})
 
-@app.route('/predict-mockfast', methods=['POST'])
+@app.route('/predict-mockfast', methods=['GET'])
 @cross_origin(origin='*')
 def predictMockFast():
-    data = request.get_json()
-    input_administered_time = pd.Timestamp(data['administeredtime'])
-    input_medication_type = data['medicationtype']
+    # data = request.get_json()
+    # input_administered_time = pd.Timestamp(data['administeredtime'])
+    # input_medication_type = data['medicationtype']
+    input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
+    input_medication_type= request.args.get('medicationtype')
 
     return jsonify({'predicted_time_difference': str("0:0:05.541243")})
 
 if __name__ == '__main__':
+    # app.run(debug=True, port=5000)
     http_server = WSGIServer(('', 5000), app)
     http_server.serve_forever()
