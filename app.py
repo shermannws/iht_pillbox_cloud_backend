@@ -7,7 +7,7 @@ from gevent.pywsgi import WSGIServer
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app)
 
 @app.route('/predict', methods=['POST'])
 @cross_origin(origin='*')
