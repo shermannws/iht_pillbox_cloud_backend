@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from model import train_model
 from database import create_connection, fetch_data
 import pandas as pd
@@ -10,12 +10,9 @@ app = Flask(__name__)
 CORS(app)
 
 @app.before_request
-def before_request():
-    headers = {'Access-Control-Allow-Origin': '*',
-               'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-               'Access-Control-Allow-Headers': 'Content-Type'}
+def basic_authentication():
     if request.method.lower() == 'options':
-        return jsonify(headers), 200
+        return Response()
 
 @app.route('/predict', methods=['POST'])
 @cross_origin(origin='*')
