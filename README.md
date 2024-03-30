@@ -20,7 +20,22 @@ Cloud DB Hosted On: Aiven
 5. `requirements.txt`: Necessary Python packages
 
 ## How to Run
-1. Start MQTT Broker using the `emqx` image
-```bash
-docker-compose up
+1. Update the following environment variables in a `.env` file
 ```
+DB_USER=\<remote pgsql database username>
+DB_PASSWORD=\<remote pgsql password>
+DB_HOST=\<remote pgsql ip address>
+DB_PORT=\<remote pgsql port number>
+DB_DATABASE=\<remote pgsql database name>
+```
+2. Install all dependencies
+```bash
+pip install -r requirements.txt
+```
+3. Start the express server by running
+```bash
+python app.py
+```
+
+## Note
+For this project, the cloud db instance, as provided in the `.env` file, has been set up to do a logical replication of the fog layer db.
