@@ -9,26 +9,13 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
-def handle_options():
-    # Customize the response to OPTIONS requests with CORS headers
-    response = jsonify({'message': 'OPTIONS request handled'})
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-    return response
-
-# Define routes that should handle OPTIONS requests using the same method
-@app.route('/predict', methods=['OPTIONS'])
-def options_route1():
-    return handle_options()
-
-@app.route('/predict-mock', methods=['OPTIONS'])
-def options_route2():
-    return handle_options()
-    
-@app.route('/predict-mockfast', methods=['OPTIONS'])
-def options_route3():
-    return handle_options()
+@app.before_request
+def before_request():
+    headers = {'Access-Control-Allow-Origin': '*',
+               'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+               'Access-Control-Allow-Headers': 'Content-Type'}
+    if request.method.lower() == 'options':
+        return jsonify(headers), 200
 
 @app.route('/predict', methods=['POST'])
 @cross_origin(origin='*')
