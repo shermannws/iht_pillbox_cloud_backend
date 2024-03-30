@@ -7,6 +7,7 @@ from gevent.pywsgi import WSGIServer
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 
 @app.before_request
@@ -73,7 +74,5 @@ def predictMockFast():
     return jsonify({'predicted_time_difference': str("0:0:05.541243")})
 
 if __name__ == '__main__':
-    # app.run(debug=True, port=5000)
-    # Production
     http_server = WSGIServer(('', 5000), app)
     http_server.serve_forever()
