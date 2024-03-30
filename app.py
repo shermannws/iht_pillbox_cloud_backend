@@ -4,8 +4,10 @@ from database import create_connection, fetch_data
 import pandas as pd
 import numpy as np
 from gevent.pywsgi import WSGIServer
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -63,7 +65,7 @@ def predictMockFast():
     return jsonify({'predicted_time_difference': str("0:0:30.541243")})
 
 if __name__ == '__main__':
-    # app.run(debug=False, port=5000)
+    # app.run(debug=True, port=5000)
     # Production
     http_server = WSGIServer(('', 5000), app)
     http_server.serve_forever()
