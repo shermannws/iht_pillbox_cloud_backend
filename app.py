@@ -19,7 +19,7 @@ def basic_authentication():
 @cross_origin(origin='*')
 def predict():
     input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
-    input_administered_time = input_administered_time.replace(year=2024,month=3,day=25)
+    input_administered_time = input_administered_time.replace(year=2024,month=3,day=25,second=0,microsecond=0,nanosecond=0)
     input_medication_type= request.args.get('medicationtype')
 
     connection = create_connection()
