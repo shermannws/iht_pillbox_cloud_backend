@@ -27,7 +27,7 @@ def train_model(df):
     y = df_encoded['time_difference']
 
     # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     # Create a new model without the consumedtime_ms feature
     X_train_new = X_train.drop(columns=['consumedtime_ms'])
