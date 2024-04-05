@@ -18,10 +18,6 @@ def basic_authentication():
 @app.route('/predict', methods=['GET'])
 @cross_origin(origin='*')
 def predict():
-    # data = request.get_json()
-    # input_administered_time = pd.Timestamp(data['administeredtime'])
-    # input_medication_type = data['medicationtype']
-
     input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
     input_medication_type= request.args.get('medicationtype')
 
@@ -61,9 +57,6 @@ def predict():
 @app.route('/predict-mock', methods=['GET'])
 @cross_origin(origin='*')
 def predictMock():
-    # data = request.get_json()
-    # input_administered_time = pd.Timestamp(data['administeredtime'])
-    # input_medication_type = data['medicationtype']
     input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
     input_medication_type= request.args.get('medicationtype')
 
@@ -72,9 +65,6 @@ def predictMock():
 @app.route('/predict-mockfast', methods=['GET'])
 @cross_origin(origin='*')
 def predictMockFast():
-    # data = request.get_json()
-    # input_administered_time = pd.Timestamp(data['administeredtime'])
-    # input_medication_type = data['medicationtype']
     input_administered_time = pd.Timestamp(request.args.get('administeredtime'))
     input_medication_type= request.args.get('medicationtype')
 
