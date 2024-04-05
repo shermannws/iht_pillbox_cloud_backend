@@ -5,8 +5,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import OneHotEncoder
 
 def train_model(df):
-    df['administeredtime'] = pd.to_datetime(df['administeredtime']).dt.floor('min')
-    df['consumedtime'] = pd.to_datetime(df['consumedtime']).dt.floor('min')
+    df['administeredtime'] = pd.to_datetime(df['administeredtime'])
+    df['consumedtime'] = pd.to_datetime(df['consumedtime'])
 
     # Convert datetime objects to milliseconds
     df['administeredtime_ms'] = df['administeredtime'].astype(np.int64) // 10**6
