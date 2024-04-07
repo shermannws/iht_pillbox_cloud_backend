@@ -9,7 +9,7 @@ Python Version: 3.10.2
 Hosted On: Koyeb
 
 ## Hosted Links
-Host URL: https://prediction-iht-cloud-backend.koyeb.app/
+Host URL: https://prediction-iht-cloud-backend.koyeb.app/ <br/>
 Cloud DB Hosted On: Aiven
 
 ## Directory Description
