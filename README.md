@@ -5,7 +5,7 @@ Done by: Sherman Ng Wei Sheng
 ## Requirements
 <u>Tested on the following hardware / software</u>: <br/>
 Device: Windows 10, 64 bit<br/>
-Python Version: 3.10.2
+Python Version: 3.10.2 <br/>
 Hosted On: Koyeb
 
 ## Hosted Links
